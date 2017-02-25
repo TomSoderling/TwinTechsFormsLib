@@ -8,26 +8,28 @@ using UIKit;
 using TwinTechs.Controls;
 using System.Diagnostics;
 
-[assembly: ExportRenderer (typeof(PageViewContainer), typeof(PageViewContainerRenderer))]
+[assembly: ExportRenderer(typeof(PageViewContainer), typeof(PageViewContainerRenderer))]
 namespace TwinTechs.Ios.Controls
 {
-	public class PageViewContainerRenderer : ViewRenderer<PageViewContainer,ViewControllerContainer>
+	public class PageViewContainerRenderer : ViewRenderer<PageViewContainer, ViewControllerContainer>
 	{
-		public PageViewContainerRenderer ()
+		public PageViewContainerRenderer()
 		{
 		}
 
-		protected override void OnElementChanged (ElementChangedEventArgs<PageViewContainer> e)
+		protected override void OnElementChanged(ElementChangedEventArgs<PageViewContainer> e)
 		{
-			base.OnElementChanged (e);
+			base.OnElementChanged(e);
 
-			if (Control != null) {
+			if (Control != null)
+			{
 				Control.ViewController = null;
 			}
 
-			if (e.NewElement != null) {
-				var viewControllerContainer = new ViewControllerContainer (Bounds);
-				SetNativeControl (viewControllerContainer);
+			if (e.NewElement != null)
+			{
+				var viewControllerContainer = new ViewControllerContainer(Bounds);
+				SetNativeControl(viewControllerContainer);
 			}
 
 
@@ -35,43 +37,55 @@ namespace TwinTechs.Ios.Controls
 
 		Page _initializedPage;
 
-		void ChangePage (Page page)
+		void ChangePage(Page page)
 		{
-			if (page != null) {
-				page.Parent = Element.GetParentPage ();
-				var pageRenderer = page.GetRenderer ();
+			if (page != null)
+			{
+				page.Parent = Element.GetParentPage();
+
+				//var pageRenderer = page.GetRenderer(); // old hacky way
+				var pageRenderer = Platform.GetRenderer(page);
+
 				UIViewController viewController = null;
-				if (pageRenderer != null && pageRenderer.ViewController != null) {
+				if (pageRenderer != null && pageRenderer.ViewController != null)
 					viewController = pageRenderer.ViewController;
-				} else {
-					viewController = page.CreateViewController ();
-				}
-				var parentPage = Element.GetParentPage ();
-				var renderer = parentPage.GetRenderer ();
+				else
+					viewController = page.CreateViewController();
+				
+				var parentPage = Element.GetParentPage();
+				//var renderer = parentPage.GetRenderer(); // old hacky way
+				var renderer = Platform.GetRenderer(parentPage);
+
 				Control.ParentViewController = renderer.ViewController;
 				Control.ViewController = viewController;
+
 				_initializedPage = page;
-			} else {
-				if (Control != null) {
+			}
+			else
+			{
+				if (Control != null)
+				{
 					Control.ViewController = null;
 				}
 			}
 		}
 
-		public override void LayoutSubviews ()
+		public override void LayoutSubviews()
 		{
-			base.LayoutSubviews ();
+			base.LayoutSubviews();
 			var page = Element != null ? Element.Content : null;
-			if (page != null) {
-				page.Layout (new Rectangle (0, 0, Bounds.Width, Bounds.Height));
+			if (page != null)
+			{
+				page.Layout(new Rectangle(0, 0, Bounds.Width, Bounds.Height));
 			}
 		}
 
-		protected override void OnElementPropertyChanged (object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
-			base.OnElementPropertyChanged (sender, e);
-			if (e.PropertyName == "Content" || e.PropertyName == "Renderer") {
-				Device.BeginInvokeOnMainThread (() => ChangePage (Element != null ? Element.Content : null));
+			base.OnElementPropertyChanged(sender, e);
+			if (e.PropertyName == "Content" || e.PropertyName == "Renderer")
+			{
+				Device.BeginInvokeOnMainThread(() => ChangePage(Element != null ? Element.Content : null));
 			}
 		}
 
