@@ -18,7 +18,7 @@ namespace TwinTechsFormsExample.Droid
 {
 	class DummyIncludes
 	{
-		public PageViewContainerRenderer _PageViewContainerRenderer;
+		public PageContainerViewRenderer _PageContainerViewRenderer;
 		public GridViewRenderer _GridViewRenderer;
 	}
 

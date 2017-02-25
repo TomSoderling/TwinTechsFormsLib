@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <ContentPage
 	xmlns="http://xamarin.com/schemas/2014/forms"
@@ -35,9 +35,9 @@
 
 		</ListView>
 
-		<controls:PageViewContainer
-			BackgroundColor="Transparent"
-			x:Name="PageContainer" />
+		<controls:PageContainerView
+			x:Name="PageContainer"
+			BackgroundColor="Transparent" />
 
 	</local:SimpleLayout>
 

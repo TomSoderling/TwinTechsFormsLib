@@ -8,16 +8,16 @@ using UIKit;
 using TwinTechs.Controls;
 using System.Diagnostics;
 
-[assembly: ExportRenderer(typeof(PageViewContainer), typeof(PageViewContainerRenderer))]
+[assembly: ExportRenderer(typeof(PageContainerView), typeof(PageContainerViewRenderer))]
 namespace TwinTechs.Ios.Controls
 {
-	public class PageViewContainerRenderer : ViewRenderer<PageViewContainer, ViewControllerContainer>
+	public class PageContainerViewRenderer : ViewRenderer<PageContainerView, ViewControllerContainer>
 	{
-		public PageViewContainerRenderer()
+		public PageContainerViewRenderer()
 		{
 		}
 
-		protected override void OnElementChanged(ElementChangedEventArgs<PageViewContainer> e)
+		protected override void OnElementChanged(ElementChangedEventArgs<PageContainerView> e)
 		{
 			base.OnElementChanged(e);
 
@@ -35,31 +35,27 @@ namespace TwinTechs.Ios.Controls
 
 		}
 
-		Page _initializedPage;
-
-		void ChangePage(Page page)
+		void ChangePage(Page newPageToDisplay)
 		{
-			if (page != null)
+			if (newPageToDisplay != null)
 			{
-				page.Parent = Element.GetParentPage();
+				newPageToDisplay.Parent = Element.GetParentPage();
 
 				//var pageRenderer = page.GetRenderer(); // old hacky way
-				var pageRenderer = Platform.GetRenderer(page);
+				var pageRenderer = Platform.GetRenderer(newPageToDisplay); // TODO: this is always null. The new page hasn't been rendered yet.
 
 				UIViewController viewController = null;
 				if (pageRenderer != null && pageRenderer.ViewController != null)
 					viewController = pageRenderer.ViewController;
 				else
-					viewController = page.CreateViewController();
+					viewController = newPageToDisplay.CreateViewController();
 				
 				var parentPage = Element.GetParentPage();
 				//var renderer = parentPage.GetRenderer(); // old hacky way
-				var renderer = Platform.GetRenderer(parentPage);
+				var parentPageRenderer = Platform.GetRenderer(parentPage);
 
-				Control.ParentViewController = renderer.ViewController;
+				Control.ParentViewController = parentPageRenderer.ViewController;
 				Control.ViewController = viewController;
-
-				_initializedPage = page;
 			}
 			else
 			{

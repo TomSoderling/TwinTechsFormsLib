@@ -47,7 +47,7 @@
     <Compile Include="TwinTechs\Gestures\PanGestureRecognizer.cs" />
     <Compile Include="TwinTechs\Gestures\PinchGestureRecognizer.cs" />
     <Compile Include="TwinTechs\Gestures\SwipeGestureRecognizer.cs" />
-    <Compile Include="TwinTechs\Controls\PageViewContainer.cs" />
+    <Compile Include="TwinTechs\Controls\PageContainerView.cs" />
     <Compile Include="XLabs\GridEventArgs{T}.cs" />
     <Compile Include="TwinTechs\Gestures\TapGestureRecognizer.cs" />
     <Compile Include="TwinTechs\Controls\IScrollAwareElement.cs" />

@@ -73,7 +73,7 @@
     <Compile Include="TwinTechs\Gestures\NativePanGestureRecognizer.cs" />
     <Compile Include="TwinTechs\Gestures\NativePinchGestureRecognizer.cs" />
     <Compile Include="TwinTechs\Gestures\NativeSwipeGestureRecognizer.cs" />
-    <Compile Include="TwinTechs\Ios\Controls\PageViewContainerRenderer.cs" />
+    <Compile Include="TwinTechs\Ios\Controls\PageContainerViewRenderer.cs" />
     <Compile Include="TwinTechs\Ios\Controls\ViewControllerContainer.cs" />
     <Compile Include="TwinTechs\Ios\Extensions\UIViewControllerExtensions.cs" />
     <Compile Include="TwinTechs\Ios\Extensions\ViewExtensions.cs" />

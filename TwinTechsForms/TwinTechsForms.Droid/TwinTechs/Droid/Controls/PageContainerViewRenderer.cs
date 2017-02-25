@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using TwinTechs.Controls;
@@ -10,22 +10,22 @@ using Android.App;
 using Android;
 using System.Reflection;
 
-[assembly: ExportRenderer (typeof(PageViewContainer), typeof(PageViewContainerRenderer))]
+[assembly: ExportRenderer (typeof(PageContainerView), typeof(PageContainerViewRenderer))]
 namespace TwinTechs.Droid.Controls
 {
-	public class PageViewContainerRenderer : ViewRenderer<PageViewContainer,Android.Views.View>
+	public class PageContainerViewRenderer : ViewRenderer<PageContainerView,Android.Views.View>
 	{
-		public PageViewContainerRenderer ()
+		public PageContainerViewRenderer ()
 		{
 			Console.WriteLine ("+++LOADED");
 		}
 
 		Page _currentPage;
 
-		protected override void OnElementChanged (ElementChangedEventArgs<PageViewContainer> e)
+		protected override void OnElementChanged (ElementChangedEventArgs<PageContainerView> e)
 		{
 			base.OnElementChanged (e);
-			var pageViewContainer = e.NewElement as PageViewContainer;
+			var pageContainerView = e.NewElement as PageContainerView;
 			if (e.NewElement != null) {
 				ChangePage (e.NewElement.Content);
 			} else {
