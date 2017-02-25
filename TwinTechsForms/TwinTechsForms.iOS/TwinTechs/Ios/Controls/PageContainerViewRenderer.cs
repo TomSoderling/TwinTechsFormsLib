@@ -13,9 +13,7 @@ namespace TwinTechs.Ios.Controls
 {
 	public class PageContainerViewRenderer : ViewRenderer<PageContainerView, ViewControllerContainer>
 	{
-		public PageContainerViewRenderer()
-		{
-		}
+		public PageContainerViewRenderer() { }
 
 		protected override void OnElementChanged(ElementChangedEventArgs<PageContainerView> e)
 		{
@@ -31,8 +29,6 @@ namespace TwinTechs.Ios.Controls
 				var viewControllerContainer = new ViewControllerContainer(Bounds);
 				SetNativeControl(viewControllerContainer);
 			}
-
-
 		}
 
 		void ChangePage(Page newPageToDisplay)
